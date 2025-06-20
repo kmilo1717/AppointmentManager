@@ -44,7 +44,6 @@ const handleSubmit = (data) => {
     
     form.put(route('citas.update', props.cita.id), {
         onSuccess: () => {
-            // Redirect handled by controller
         }
     })
 }

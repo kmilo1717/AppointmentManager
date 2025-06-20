@@ -31,6 +31,8 @@ class Cita extends Model
         'created' => CitaCreated::class,
     ];
 
+    protected $table = 'appointments';
+
     // Relationships
     public function usuario()
     {

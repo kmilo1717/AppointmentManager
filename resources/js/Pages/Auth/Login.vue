@@ -10,7 +10,7 @@
                 <Card class="shadow-2xl rounded-2xl overflow-hidden border-0 backdrop-blur-sm bg-white/90">
 
                     <template #content>
-                        <div class="p-6 space-y-6">
+                        <div class="p-3 space-y-1">
                             <!-- Mensaje de bienvenida -->
                             <div class="text-center mb-6">
                                 <h2 class="text-xl font-semibold text-gray-800 mb-1">Sistema de Citas</h2>
@@ -45,13 +45,21 @@
 
                                 <!-- Campo Contraseña -->
                                 <div class="space-y-2">
-                                    <label for="password" class="block text-gray-800 font-semibold text-sm">
-                                        <i class="pi pi-lock mr-2 text-primary-600"></i>
-                                        Contraseña
-                                        <span class="text-red-500 ml-1">*</span>
-                                    </label>
+                                    <div class="flex items-center justify-between">
+                                        <label for="password" class="block text-gray-800 font-semibold text-sm">
+                                            <i class="pi pi-lock mr-2 text-primary-600"></i>
+                                            Contraseña
+                                            <span class="text-red-500 ml-1">*</span>
+                                        </label>
+
+                                        <Link v-if="canResetPassword" :href="route('password.request')"
+                                            class="text-sm text-primary-600 hover:text-primary-700 hover:underline transition-colors pl-6">
+                                        ¿Olvidaste tu contraseña?
+                                        </Link>
+                                    </div>
+
                                     <Password id="password" v-model="form.password" placeholder="Ingresa tu contraseña"
-                                        class="w-full" inputClass="h-12" :class="{ 'p-invalid': form.errors.password }"
+                                        inputClass="w-full" :class="['w-full', { 'p-invalid': form.errors.password }]"
                                         :feedback="false" toggleMask required autocomplete="current-password" />
                                     <Transition name="fade">
                                         <small v-if="form.errors.password" class="p-error flex items-center">
@@ -69,11 +77,6 @@
                                             Mantener sesión iniciada
                                         </label>
                                     </div>
-
-                                    <Link v-if="canResetPassword" :href="route('password.request')"
-                                        class="text-sm text-primary-600 hover:text-primary-700 hover:underline transition-colors">
-                                    ¿Olvidaste tu contraseña?
-                                    </Link>
                                 </div>
 
                                 <!-- Botón de login -->

@@ -6,7 +6,7 @@
         <div v-if="$slots.header" class="w-full max-w-md mb-4">
             <slot name="header" />
         </div>
-        <div class="">
+        <div>
             <slot />
         </div>
     </div>

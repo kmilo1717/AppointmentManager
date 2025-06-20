@@ -1,23 +1,16 @@
 <template>
     <AuthenticatedLayout>
+
         <Head title="Detalles de la Cita" />
 
         <template #header>
             <div class="flex justify-content-between align-items-center">
                 <h1 class="text-3xl font-bold text-900 m-0">Detalles de la Cita</h1>
                 <div class="flex gap-2">
-                    <Button
-                        v-if="canEdit"
-                        label="Editar"
-                        icon="pi pi-pencil"
-                        @click="$inertia.visit(route('citas.edit', cita.id))"
-                    />
-                    <Button
-                        label="Volver"
-                        icon="pi pi-arrow-left"
-                        severity="secondary"
-                        @click="$inertia.visit(route('dashboard'))"
-                    />
+                    <Button v-if="canEdit" label="Editar" icon="pi pi-pencil"
+                        @click="$inertia.visit(route('citas.edit', cita.id))" />
+                    <Button label="Volver" icon="pi pi-arrow-left" severity="secondary"
+                        @click="$inertia.visit(route('dashboard'))" />
                 </div>
             </div>
         </template>
@@ -27,16 +20,16 @@
             <div class="col-12 lg:col-8">
                 <Card class="mb-4">
                     <template #header>
-                        <div class="p-4 bg-primary">
+                        <div class="p-3 bg-[var(--p-primary-color)] rounded-t-lg">
                             <h2 class="text-2xl font-bold text-white m-0">
                                 <i class="pi pi-calendar mr-2"></i>
                                 Información de la Cita
                             </h2>
                         </div>
                     </template>
-                    
+
                     <template #content>
-                        <div class="grid p-4">
+                        <div class="grid p-3">
                             <div class="col-12 md:col-6">
                                 <div class="field mb-4">
                                     <label class="font-medium text-color-secondary mb-2 block">Fecha:</label>
@@ -46,9 +39,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 md:col-6">
-                                <div class="field mb-4">
+                                <div class="field mb-2">
                                     <label class="font-medium text-color-secondary mb-2 block">Hora:</label>
                                     <div class="flex align-items-center gap-2">
                                         <i class="pi pi-clock text-primary"></i>
@@ -56,20 +49,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 md:col-6">
-                                <div class="field mb-4">
+                                <div class="field mb-2">
                                     <label class="font-medium text-color-secondary mb-2 block">Estado:</label>
-                                    <Tag
-                                        :value="getEstadoLabel(cita.estado)"
-                                        :severity="getEstadoSeverity(cita.estado)"
-                                        class="text-lg"
-                                    />
+                                    <Tag :value="getEstadoLabel(cita.estado)" :severity="getEstadoSeverity(cita.estado)"
+                                        class="text-lg" />
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 md:col-6">
-                                <div class="field mb-4">
+                                <div class="field mb-2">
                                     <label class="font-medium text-color-secondary mb-2 block">Tipo de Servicio:</label>
                                     <div class="flex align-items-center gap-2">
                                         <i class="pi pi-wrench text-primary"></i>
@@ -77,60 +67,14 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12">
-                                <div class="field mb-4">
+                                <div class="field mb-1">
                                     <label class="font-medium text-color-secondary mb-2 block">Descripción:</label>
                                     <div class="p-3 bg-gray-50 border-round">
                                         <p class="m-0 text-color line-height-3">
                                             {{ cita.descripcion || 'Sin descripción' }}
                                         </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                </Card>
-
-                <!-- Información del Vehículo -->
-                <Card v-if="hasVehicleInfo">
-                    <template #header>
-                        <div class="p-4 bg-blue-500">
-                            <h2 class="text-2xl font-bold text-white m-0">
-                                <i class="pi pi-car mr-2"></i>
-                                Información del Vehículo
-                            </h2>
-                        </div>
-                    </template>
-                    
-                    <template #content>
-                        <div class="grid p-4">
-                            <div class="col-12 md:col-4" v-if="cita.vehiculo_marca">
-                                <div class="field mb-4">
-                                    <label class="font-medium text-color-secondary mb-2 block">Marca:</label>
-                                    <div class="flex align-items-center gap-2">
-                                        <i class="pi pi-tag text-blue-500"></i>
-                                        <span class="text-lg">{{ cita.vehiculo_marca }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-12 md:col-4" v-if="cita.vehiculo_modelo">
-                                <div class="field mb-4">
-                                    <label class="font-medium text-color-secondary mb-2 block">Modelo:</label>
-                                    <div class="flex align-items-center gap-2">
-                                        <i class="pi pi-tag text-blue-500"></i>
-                                        <span class="text-lg">{{ cita.vehiculo_modelo }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-12 md:col-4" v-if="cita.vehiculo_placa">
-                                <div class="field mb-4">
-                                    <label class="font-medium text-color-secondary mb-2 block">Placa:</label>
-                                    <div class="flex align-items-center gap-2">
-                                        <i class="pi pi-hashtag text-blue-500"></i>
-                                        <span class="text-lg font-mono">{{ cita.vehiculo_placa }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -151,15 +95,10 @@
                             </h2>
                         </div>
                     </template>
-                    
+
                     <template #content>
                         <div class="p-4 text-center">
-                            <Avatar 
-                                :label="cita.usuario.name.charAt(0)" 
-                                size="xlarge" 
-                                class="mb-3"
-                                shape="circle"
-                            />
+                            <Avatar :label="cita.usuario.name.charAt(0)" size="xlarge" class="mb-3" shape="circle" />
                             <h3 class="text-xl font-bold mb-2">{{ cita.usuario.name }}</h3>
                             <p class="text-color-secondary mb-2">{{ cita.usuario.email }}</p>
                             <p v-if="cita.usuario.telefono" class="text-color-secondary">
@@ -173,81 +112,95 @@
                 <!-- Acciones Rápidas -->
                 <Card v-if="canEdit || canCancel || $page.props.auth.user.isAdmin" class="mb-4">
                     <template #header>
-                        <div class="p-4 bg-orange-500">
+                        <div class="p-3 bg-[var(--p-gray-300)] rounded-t-lg">
                             <h2 class="text-xl font-bold text-white m-0">
                                 <i class="pi pi-cog mr-2"></i>
                                 Acciones
                             </h2>
                         </div>
                     </template>
-                    
+
                     <template #content>
-                        <div class="p-4 flex flex-column gap-3">
-                            <Button
-                                v-if="canEdit"
-                                label="Editar Cita"
-                                icon="pi pi-pencil"
-                                class="w-full"
-                                @click="$inertia.visit(route('citas.edit', cita.id))"
-                            />
-                            
-                            <Button
-                                v-if="canCancel"
-                                label="Cancelar Cita"
-                                icon="pi pi-times"
-                                severity="warning"
-                                class="w-full"
-                                @click="cancelCita"
-                            />
-                            
-                            <Button
-                                v-if="$page.props.auth.user.isAdmin && cita.estado === 'pendiente'"
-                                label="Confirmar Cita"
-                                icon="pi pi-check"
-                                severity="success"
-                                class="w-full"
-                                @click="confirmCita"
-                            />
-                            
-                            <Button
-                                v-if="$page.props.auth.user.isAdmin"
-                                label="Eliminar Cita"
-                                icon="pi pi-trash"
-                                severity="danger"
-                                class="w-full"
-                                @click="deleteCita"
-                            />
+                        <div class="p-3 flex flex-column gap-3">
+                            <Button v-if="canEdit" label="Editar Cita" icon="pi pi-pencil" class="w-full"
+                                @click="$inertia.visit(route('citas.edit', cita.id))" />
+
+                            <Button v-if="canCancel" label="Cancelar Cita" icon="pi pi-times" severity="warning"
+                                class="w-full" @click="cancelCita" />
+
+                            <Button v-if="$page.props.auth.user.isAdmin && cita.estado === 'pendiente'"
+                                label="Confirmar Cita" icon="pi pi-check" severity="success" class="w-full"
+                                @click="confirmCita" />
+
+                            <Button v-if="$page.props.auth.user.isAdmin" label="Eliminar Cita" icon="pi pi-trash"
+                                severity="danger" class="w-full" @click="deleteCita" />
                         </div>
                     </template>
                 </Card>
-
-                <!-- Información Adicional -->
-                <Card class="mt-4">
+                <!-- Información del Vehículo -->
+                <Card v-if="hasVehicleInfo" class="mb-4">
                     <template #header>
-                        <div class="p-4 bg-gray-600">
+                        <div class="p-3 bg-[var(--p-blue-500)] rounded-t-lg">
+                            <h2 class="text-2xl font-bold text-white m-0">
+                                <i class="pi pi-car mr-2"></i>
+                                Información del Vehículo
+                            </h2>
+                        </div>
+                    </template>
+
+                    <template #content>
+                        <div class="grid pt-2 px-2">
+                            <div class="col" v-if="cita.vehiculo_marca">
+                                <label class="font-medium text-color-secondary block">Marca:</label>
+                                <div class="flex align-items-center gap-2">
+                                    <i class="pi pi-tag text-blue-500"></i>
+                                    <span class="text-lg">{{ cita.vehiculo_marca }}</span>
+                                </div>
+                            </div>
+
+                            <div class="col" v-if="cita.vehiculo_modelo">
+                                <label class="font-medium text-color-secondary block">Modelo:</label>
+                                <div class="flex align-items-center gap-2">
+                                    <i class="pi pi-tag text-blue-500"></i>
+                                    <span class="text-lg">{{ cita.vehiculo_modelo }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="grid pt-2 px-2">
+                            <div class="col" v-if="cita.vehiculo_placa">
+                                <label class="font-medium text-color-secondary mb-2 block">Placa:</label>
+                                <div class="flex align-items-center gap-2">
+                                    <i class="pi pi-hashtag text-blue-500"></i>
+                                    <span class="text-lg font-mono">{{ cita.vehiculo_placa }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </Card>
+                <!-- Información Adicional -->
+                <Card>
+                    <template #header>
+                        <div class="p-3 bg-[var(--p-gray-800)] rounded-t-lg">
                             <h2 class="text-xl font-bold text-white m-0">
                                 <i class="pi pi-info-circle mr-2"></i>
                                 Información Adicional
                             </h2>
                         </div>
                     </template>
-                    
+
                     <template #content>
-                        <div class="p-4">
+                        <div class="p-2">
                             <div class="field mb-3">
                                 <label class="font-medium text-color-secondary mb-1 block">Creada:</label>
                                 <span class="text-sm">{{ formatDateTime(cita.created_at) }}</span>
                             </div>
-                            
+
                             <div class="field mb-3">
                                 <label class="font-medium text-color-secondary mb-1 block">Última actualización:</label>
                                 <span class="text-sm">{{ formatDateTime(cita.updated_at) }}</span>
                             </div>
-                            
-                            <div class="field">
-                                <label class="font-medium text-color-secondary mb-1 block">ID de la cita:</label>
-                                <span class="text-sm font-mono">#{{ cita.id }}</span>
-                            </div>
+
                         </div>
                     </template>
                 </Card>
