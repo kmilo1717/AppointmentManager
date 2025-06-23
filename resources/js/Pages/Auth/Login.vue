@@ -8,15 +8,18 @@
             <!-- Animación de entrada -->
             <div class="w-full max-w-md animate-fade-in">
                 <Card class="shadow-2xl rounded-2xl overflow-hidden border-0 backdrop-blur-sm bg-white/90">
+                    <template #header>
+                        <div class="text-center bg-[var(--p-primary-color)] p-4 rounded-t-lg">
+                            <h1 class="text-2xl font-bold text-white">
+                                <i class="pi pi-sign-in mr-2"></i>
+                                Sistema de Citas
+                            </h1>
+                            <p class="text-sm text-white">Accede a tu cuenta para continuar</p>
+                        </div>
+                    </template>
 
                     <template #content>
-                        <div class="p-6 space-y-6">
-                            <!-- Mensaje de bienvenida -->
-                            <div class="text-center mb-6">
-                                <h2 class="text-xl font-semibold text-gray-800 mb-1">Sistema de Citas</h2>
-                                <p class="text-sm text-gray-600">Inicia sesión para acceder a tu cuenta</p>
-                            </div>
-
+                        <div class="p-4 space-y-3">
                             <!-- Mensaje de estado -->
                             <Message v-if="status" severity="success" :closable="false" class="mb-4">
                                 {{ status }}
@@ -51,7 +54,7 @@
                                         <span class="text-red-500 ml-1">*</span>
                                     </label>
                                     <Password id="password" v-model="form.password" placeholder="Ingresa tu contraseña"
-                                        class="w-full" inputClass="h-12" :class="{ 'p-invalid': form.errors.password }"
+                                        :inputClass="['h-12 w-full']" :class="{'p-invalid': form.errors.password }" class="w-full"
                                         :feedback="false" toggleMask required autocomplete="current-password" />
                                     <Transition name="fade">
                                         <small v-if="form.errors.password" class="p-error flex items-center">
@@ -62,7 +65,7 @@
                                 </div>
 
                                 <!-- Recordarme -->
-                                <div class="flex items-center justify-between">
+                                <div class="flex items-center justify-between gap-3">
                                     <div class="flex items-center">
                                         <Checkbox id="remember" v-model="form.remember" :binary="true" class="mr-2" />
                                         <label for="remember" class="text-sm text-gray-700 cursor-pointer">

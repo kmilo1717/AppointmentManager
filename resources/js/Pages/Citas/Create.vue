@@ -32,17 +32,32 @@ import CitaForm from '@/Components/CitaForm.vue'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
 import { route } from 'ziggy-js';
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
 
 defineProps({
     usuarios: Array,
 })
 
-const handleSubmit = (data) => {
-    const form = useForm(data)
+const handleSubmit = (form) => {
     
     form.post(route('citas.store'), {
         onSuccess: () => {
-            // Redirect handled by controller
+            toast.add({
+                severity: 'success',
+                summary: 'Cita Creada',
+                detail: 'La cita ha sido creada exitosamente',
+                life: 3000
+            })
+        },
+        onError: (errors) => {
+            toast.add({
+                severity: 'error',
+                summary: 'Error al crear la cita',
+                detail: 'Por favor, corrige los errores y vuelve a intentarlo.',
+                life: 3000
+            })
         }
     })
 }

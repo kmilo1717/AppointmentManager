@@ -27,25 +27,45 @@
 </template>
 
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 import { route } from 'ziggy-js';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import CitaForm from '@/Components/CitaForm.vue'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
 
 const props = defineProps({
     cita: Object,
     usuarios: Array,
 })
 
-const handleSubmit = (data) => {
-    const form = useForm(data)
+const handleSubmit = (form) => {
     
     form.put(route('citas.update', props.cita.id), {
         onSuccess: () => {
-            // Redirect handled by controller
+            toast.add({
+                severity: 'success',
+                summary: 'Cita Cancelada',
+                detail: 'La cita ha sido cancelada exitosamente',
+                life: 3000
+            })
+        },
+        onError: (errors) => {
+            toast.add({
+                severity: 'error',
+                summary: 'Error al crear la cita',
+                detail: 'Por favor, corrige los errores y vuelve a intentarlo.',
+                life: 3000
+            })
+            console.error(errors);
+        },
+        onFinish: (errors) => {
+            console.error(errors);
         }
     })
 }
+
 </script>

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->date('fecha');
@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('vehiculo_modelo')->nullable();
             $table->string('vehiculo_placa')->nullable();
             $table->timestamps();
-
+            $table->softDeletes();
             $table->unique(['fecha', 'hora']);
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('appointments');
     }
 };

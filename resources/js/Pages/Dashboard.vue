@@ -226,6 +226,18 @@
                             </div>
                         </template>
                     </Column>
+
+                    <template #empty v-if="!citas.data.length && !filterForm.estado && !filterForm.fecha && !filterForm.usuario_id">
+                        <div class="text-center text-color-secondary">
+                            No se han registrado citas.
+                        </div>
+                    </template>
+
+                    <template #empty v-if="citas.data.length === 0 && (filterForm.estado || filterForm.fecha || filterForm.usuario_id)">
+                        <div class="text-center text-color-secondary">
+                            No se encontraron citas con los filtros aplicados.
+                        </div>
+                    </template>
                 </DataTable>
             </template>
         </Card>
@@ -272,12 +284,16 @@ const estadoOptions = [
 ]
 
 const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('es-ES', {
+
+    const formatter = new Intl.DateTimeFormat('es-ES', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
-    })
+        day: 'numeric',
+        timeZone: 'UTC'
+    }).format(new Date(dateString));
+
+    return formatter.charAt(0).toUpperCase() + formatter.slice(1);
 }
 
 const getEstadoLabel = (estado) => {

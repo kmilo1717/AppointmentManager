@@ -50,7 +50,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/Stores/authStore'
 import { useToast } from 'primevue/usetoast'
 
 // PrimeVue Components

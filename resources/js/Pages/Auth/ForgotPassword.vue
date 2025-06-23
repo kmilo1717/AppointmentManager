@@ -22,11 +22,11 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <div class="bg-gray-400">
+        <div class="bg-[var(--p-gray-100)] p-6 rounded-lg shadow-md max-w-md mx-auto mt-10 animate-fade-in">
 
             <Head title="Restablecer Contraseña" />
 
-            <div class="w-full max-w-30rem mx-auto mt-6 p-4 shadow-2 border-round surface-card">
+            <div class="w-full max-w-30rem mx-auto">
                 <h2 class="text-center text-2xl font-bold text-primary mb-3">
                     ¿Olvidaste tu contraseña?
                 </h2>

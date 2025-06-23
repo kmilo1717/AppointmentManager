@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\CitaCreated;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cita extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'appointments';
 
     protected $fillable = [
         'usuario_id',

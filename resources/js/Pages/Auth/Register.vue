@@ -5,16 +5,16 @@
         <div class="w-full mx-auto mt-4" style="min-width: 400px !important;">
             <Card class="shadow-4">
                 <template #header>
-                    <div class="text-center bg-primary">
+                    <div class="text-center bg-[var(--p-primary-color)] p-3 rounded-t-lg">
                         <h1 class="text-3xl font-bold text-white m-0">
                             <i class="pi pi-user-plus mr-2"></i> Registro
                         </h1>
-                        <p class="text-primary-50">Crea tu nueva cuenta</p>
+                        <p class="text-white">Crea tu nueva cuenta</p>
                     </div>
                 </template>
 
                 <template #content>
-                    <form @submit.prevent="submit" class="p-fluid p-4">
+                    <form @submit.prevent="submit" class="p-fluid p-3">
 
                         <div class="field mb-3">
                             <label for="name" class="block text-900 font-medium mb-2">Usuario *</label>
@@ -60,7 +60,7 @@
                             <InputText
                                 id="telefono"
                                 v-model="form.telefono"
-                                placeholder="3001234567"
+                                placeholder="Número de teléfono"
                                 class="w-full"
                                 :class="{ 'p-invalid': form.errors.telefono }"
                             />
@@ -75,6 +75,7 @@
                                 placeholder="Crea una contraseña segura"
                                 class="w-full"
                                 :class="{ 'p-invalid': form.errors.password }"
+                                :inputClass="['w-full']"
                                 toggleMask
                                 autocomplete="new-password"
                             />
@@ -89,6 +90,7 @@
                                 placeholder="Repite tu contraseña"
                                 class="w-full"
                                 :class="{ 'p-invalid': form.errors.password_confirmation }"
+                                :inputClass="['w-full']"
                                 toggleMask
                                 :feedback="false"
                                 autocomplete="new-password"

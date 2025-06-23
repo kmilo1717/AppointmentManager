@@ -85,7 +85,7 @@
                     <InputText
                         id="vehiculo_marca"
                         v-model="form.vehiculo_marca"
-                        placeholder="Ej: Toyota"
+                        placeholder="Ingrese la marca"
                         class="w-full"
                         :class="{ 'p-invalid': form.errors.vehiculo_marca }"
                     />
@@ -101,7 +101,7 @@
                     <InputText
                         id="vehiculo_modelo"
                         v-model="form.vehiculo_modelo"
-                        placeholder="Ej: Corolla"
+                        placeholder="Ingrese el modelo"
                         class="w-full"
                         :class="{ 'p-invalid': form.errors.vehiculo_modelo }"
                     />
@@ -114,11 +114,13 @@
                     <label for="vehiculo_placa" class="block text-900 font-medium mb-2">
                         Placa del Vehículo
                     </label>
-                    <InputText
+                    <InputMask
                         id="vehiculo_placa"
                         v-model="form.vehiculo_placa"
-                        placeholder="Ej: ABC-123"
-                        class="w-full"
+                        mask="aaa-999"
+                        placeholder="AAA-999"
+                        class="w-full text-uppercase"
+                        pattern="^[a-z]{3}-\d{3}$"
                         :class="{ 'p-invalid': form.errors.vehiculo_placa }"
                     />
                     <small v-if="form.errors.vehiculo_placa" class="p-error">{{ form.errors.vehiculo_placa }}</small>
@@ -179,8 +181,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { useForm, usePage } from '@inertiajs/vue3'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useForm } from '@inertiajs/vue3'
 import axios from 'axios'
 import { route } from 'ziggy-js';
 
@@ -190,6 +192,7 @@ import Dropdown from 'primevue/dropdown'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import InputMask from 'primevue/inputmask'
 
 const props = defineProps({
     cita: {
@@ -244,21 +247,24 @@ const estadoOptions = [
 
 const onDateChange = async () => {
     if (!form.fecha) return
-    
+
     loadingHours.value = true
     try {
         const dateStr = form.fecha.toISOString().split('T')[0]
-        const response = await axios.get(route('citas.available-hours'), {
-            params: { fecha: dateStr }
-        })
         
+        const response = await axios.get(route('citas.available-hours'), {
+            params: { fecha: dateStr, citaId: props.cita?.id || null }
+        })
+
         if (response.data.success) {
             availableHours.value = response.data.data
+
             
             if (form.hora && !availableHours.value.includes(form.hora)) {
                 form.hora = ''
             }
         }
+
     } catch (error) {
         console.error('Error loading available hours:', error)
     } finally {
@@ -267,16 +273,18 @@ const onDateChange = async () => {
 }
 
 const handleSubmit = () => {
-    const data = {
-        ...form.data(),
-        fecha: form.fecha ? form.fecha.toISOString().split('T')[0] : null
-    }
-    
-    emit('submit', data)
+
+    form.fecha = form.fecha ? form.fecha.toISOString().split('T')[0] : null
+
+    emit('submit', form)
 }
 
 // Watch date changes
 watch(() => form.fecha, onDateChange)
+
+watch(() => form.errors, (errors) => {
+  console.log('Cambios en los errores del form:', errors);
+});
 
 onMounted(() => {
     if (form.fecha) {
