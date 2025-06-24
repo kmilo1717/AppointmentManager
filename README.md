@@ -210,24 +210,3 @@ npm run build
 tail -f storage/logs/laravel.log
 ```
 
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 📞 Soporte
-
-Para soporte técnico o preguntas:
-- Email: soporte@taller.com
-- Issues: [GitHub Issues](https://github.com/tu-usuario/taller-vehiculos/issues)
-
----
-
-Desarrollado con ❤️ usando Laravel Breeze + Inertia.js + Vue 3 + PrimeVue
