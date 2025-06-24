@@ -31,24 +31,24 @@ Sistema completo para la gestión de citas de un taller de vehículos desarrolla
 ## 🛠️ Instalación
 
 ### 1. Clonar el repositorio
-\`\`\`bash
-git clone https://github.com/tu-usuario/taller-vehiculos.git
-cd taller-vehiculos
-\`\`\`
+```bash
+git clone https://github.com/kmilo1717/AppointmentManager.git
+cd AppointmentManager
+```
 
 ### 2. Instalar dependencias de PHP
-\`\`\`bash
+```bash
 composer install
-\`\`\`
+```
 
 ### 3. Configurar el archivo .env
-\`\`\`bash
+```bash
 cp .env.example .env
 php artisan key:generate
-\`\`\`
+```
 
 Configurar la base de datos y correo en `.env`:
-\`\`\`env
+```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -64,29 +64,29 @@ MAIL_PASSWORD=tu_password
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=noreply@taller.com
 MAIL_FROM_NAME="Taller de Vehículos"
-\`\`\`
+```
 
 ### 4. Ejecutar migraciones y seeders
-\`\`\`bash
+```bash
 php artisan migrate --seed
-\`\`\`
+```
 
 ### 5. Instalar dependencias de Node.js
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### 6. Compilar assets
-\`\`\`bash
+```bash
 npm run dev
 # o para producción
 npm run build
-\`\`\`
+```
 
 ### 7. Iniciar el servidor
-\`\`\`bash
+```bash
 php artisan serve
-\`\`\`
+```
 
 ## 👥 Usuarios de Prueba
 
@@ -149,23 +149,23 @@ El sistema envía emails automáticamente cuando:
 7. Configurar cron jobs para Laravel Scheduler
 
 ### Cron Job
-\`\`\`bash
+```bash
 * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
-\`\`\`
+```
 
 ## 🧪 Testing
 
-\`\`\`bash
+```bash
 # Ejecutar tests
 php artisan test
 
 # Con coverage
 php artisan test --coverage
-\`\`\`
+```
 
 ## 📝 Estructura del Proyecto
 
-\`\`\`
+```
 ├── app/
 │   ├── Events/           # Eventos del sistema
 │   ├── Http/
@@ -187,11 +187,11 @@ php artisan test --coverage
 └── routes/
     ├── auth.php         # Rutas de autenticación (Breeze)
     └── web.php          # Rutas web principales
-\`\`\`
+```
 
 ## 🔧 Comandos Útiles
 
-\`\`\`bash
+```bash
 # Limpiar cache
 php artisan cache:clear
 php artisan config:clear
@@ -208,7 +208,7 @@ npm run build
 
 # Ver logs en tiempo real
 tail -f storage/logs/laravel.log
-\`\`\`
+```
 
 ## 🤝 Contribución
 
